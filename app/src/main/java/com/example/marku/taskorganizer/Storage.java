@@ -1,8 +1,12 @@
 package com.example.marku.taskorganizer;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by marku on 18.2.2018.
@@ -36,7 +40,7 @@ public class Storage extends SQLiteOpenHelper {
         String CREATE_PLAN_TABLE = "CREATE TABLE " + PLAN_TABLE + "("
                 + PLAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + PLAN_TASK_DAY + " TEXT, "
-                + PLAN_TASK_ID + " INTEGER "
+                + PLAN_TASK_ID + " TEXT "
                 + ")";
 
         database.execSQL(CREATE_PLAN_TABLE);
@@ -52,5 +56,61 @@ public class Storage extends SQLiteOpenHelper {
 
     }
 
+    public void addTask(String task, String deadline){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(TASK, task);
+        val.put(DEADLINE, deadline);
+        database.insert(TASKS_TABLE, null,val);
+        database.close();
+
+    }
+    public void addPlan(String task_day, String task_id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues val = new ContentValues();
+
+        val.put(PLAN_TASK_DAY, task_day);
+        val.put(DEADLINE, task_id);
+
+        database.insert(PLAN_TABLE, null,val);
+        database.close();
+
+    }
+    public ArrayList<String> getTasks(){
+        SQLiteDatabase base = this.getReadableDatabase();
+        ArrayList<String> tasks = new ArrayList<>();
+        Cursor cursor = base.rawQuery("SELECT Task, Deadline FROM Tasks",null);
+        if(cursor != null && cursor.getCount()>0){
+
+            cursor.moveToFirst();
+            do{
+                String task = cursor.getString(0) + ":" + cursor.getString(1);
+                tasks.add(task);
+            }
+            while(cursor.moveToNext());
+            return tasks;
+
+        }
+        return tasks;
+
+    }
+    public ArrayList<String> getPlans(){
+        SQLiteDatabase base = this.getReadableDatabase();
+        ArrayList<String> plans = new ArrayList<>();
+        Cursor cursor = base.rawQuery("SELECT Planned_day, Task_id_of_Plan FROM Tasks",null);
+        if(cursor != null && cursor.getCount()>0){
+
+            cursor.moveToFirst();
+            do{
+                String plan = cursor.getString(0) + ":" + cursor.getString(1);
+                plans.add(plan);
+            }
+            while(cursor.moveToNext());
+            return plans;
+
+        }
+        return plans;
+
+    }
 
 }
