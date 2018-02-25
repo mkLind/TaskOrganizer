@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -112,5 +113,26 @@ public class Storage extends SQLiteOpenHelper {
         return plans;
 
     }
+public void deleteTask(String task) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    try {
+        db.delete("TASKS_TABLE", "TASK=?", new String[]{task});
+    } catch (Exception e) {
+        Log.d("Storage", "Not able to delete");
 
+
+    }
+    db.close();
+}
+    public void deletePlan(String task_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.delete("PLAN_TABLE", "TASK_ID=?", new String[] {task_id});
+        }catch(Exception e){
+            Log.d("Storage","Not able to delete");
+
+
+        }
+        db.close();
+}
 }
