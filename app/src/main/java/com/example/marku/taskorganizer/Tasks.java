@@ -26,6 +26,7 @@ public class Tasks extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
     }
 
     @Override

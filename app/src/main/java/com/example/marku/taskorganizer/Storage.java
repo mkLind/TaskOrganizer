@@ -85,7 +85,7 @@ public class Storage extends SQLiteOpenHelper {
 
             cursor.moveToFirst();
             do{
-                String task = cursor.getString(0) + ":" + cursor.getString(1);
+                String task = cursor.getString(0) + ":" + cursor.getString(1)+":"+cursor.getString(2);
                 tasks.add(task);
             }
             while(cursor.moveToNext());
