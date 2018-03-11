@@ -17,7 +17,7 @@ public class Storage extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "TaskData";
-    private static final String TASKS_TABLE = "Tasks";
+    private static final String TASKS_TABLE = "Front";
     private static final String PLAN_TABLE = "Plans";
     private static final String TASK_ID="Task_id";
     private static final String PLAN_ID="Plan_id";
@@ -66,11 +66,11 @@ public class Storage extends SQLiteOpenHelper {
         database.close();
 
     }
-    public void addPlan(String task_day, String task_id){
+    public void addPlan(String plan_task_day, String task_id){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues val = new ContentValues();
 
-        val.put(PLAN_TASK_DAY, task_day);
+        val.put(PLAN_TASK_DAY, plan_task_day);
         val.put(DEADLINE, task_id);
 
         database.insert(PLAN_TABLE, null,val);
@@ -98,12 +98,12 @@ public class Storage extends SQLiteOpenHelper {
     public ArrayList<String> getPlans(){
         SQLiteDatabase base = this.getReadableDatabase();
         ArrayList<String> plans = new ArrayList<>();
-        Cursor cursor = base.rawQuery("SELECT Planned_day, Task_id_of_Plan FROM Tasks",null);
+        Cursor cursor = base.rawQuery("SELECT Planned_day, Task_id_of_Plan, Plan_id FROM Plans",null);
         if(cursor != null && cursor.getCount()>0){
 
             cursor.moveToFirst();
             do{
-                String plan = cursor.getString(0) + ":" + cursor.getString(1);
+                String plan = cursor.getString(0) + ":" + cursor.getString(1) +":"+cursor.getString(2);
                 plans.add(plan);
             }
             while(cursor.moveToNext());
@@ -113,10 +113,10 @@ public class Storage extends SQLiteOpenHelper {
         return plans;
 
     }
-public void deleteTask(String task) {
+public void deleteTask(String task_id) {
     SQLiteDatabase db = this.getWritableDatabase();
     try {
-        db.delete("TASKS_TABLE", "TASK=?", new String[]{task});
+        db.delete("TASKS_TABLE", "TASK_ID=?", new String[]{task_id});
     } catch (Exception e) {
         Log.d("Storage", "Not able to delete");
 

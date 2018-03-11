@@ -8,16 +8,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class Tasks extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class Front extends AppCompatActivity {
+    private DataManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        manager = new DataManager(getApplicationContext());
+        ArrayList<Task> tsk = manager.loadTasks();
+        ArrayList<String> tskdisp = new ArrayList<>();
+        for(int i = 0; i<tsk.size();i++){
+            tskdisp.add(tsk.get(i).toString());
 
+        }
+
+        ListView tasks = findViewById(R.id.Task_display);
+        ArrayAdapter<String>  task_adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, tskdisp);
+        tasks.setAdapter(task_adapter);
+
+        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
