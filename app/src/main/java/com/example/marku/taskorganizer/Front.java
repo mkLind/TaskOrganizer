@@ -33,7 +33,7 @@ public class Front extends AppCompatActivity {
         ArrayAdapter<String>  task_adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, tskdisp);
         tasks.setAdapter(task_adapter);
 
-        
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,7 +17,7 @@ public class Storage extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "TaskData";
-    private static final String TASKS_TABLE = "Front";
+    private static final String TASKS_TABLE = "Tasks";
     private static final String PLAN_TABLE = "Plans";
     private static final String TASK_ID="Task_id";
     private static final String PLAN_ID="Plan_id";
