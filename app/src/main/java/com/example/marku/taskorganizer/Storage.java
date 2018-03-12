@@ -51,8 +51,8 @@ public class Storage extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion){
-        database.execSQL("DROP TABLE IF EXISTS CREATE_TASK_TABLE");
-        database.execSQL("DROP TABLE IF EXISTS CREATE_PLAN_TABLE");
+        database.execSQL("DROP TABLE IF EXISTS TASKS_TABLE");
+        database.execSQL("DROP TABLE IF EXISTS PLAN_TABLE");
         this.onCreate(database);
 
     }
@@ -80,7 +80,7 @@ public class Storage extends SQLiteOpenHelper {
     public ArrayList<String> getTasks(){
         SQLiteDatabase base = this.getReadableDatabase();
         ArrayList<String> tasks = new ArrayList<>();
-        Cursor cursor = base.rawQuery("SELECT Task, Deadline FROM Tasks",null);
+        Cursor cursor = base.rawQuery("SELECT task, Deadline FROM Tasks",null);
         if(cursor != null && cursor.getCount()>0){
 
             cursor.moveToFirst();
