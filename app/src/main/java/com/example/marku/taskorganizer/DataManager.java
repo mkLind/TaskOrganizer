@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Created by marku on 11.3.2018.
+ * A class for masking database interaction from the rest of the application.
  */
 
 public class DataManager {

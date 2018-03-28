@@ -22,6 +22,7 @@ public class Front extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Load tasks from the database.
         manager = new DataManager(getApplicationContext());
         ArrayList<Task> tsk = manager.loadTasks();
         ArrayList<String> tskdisp = new ArrayList<>();

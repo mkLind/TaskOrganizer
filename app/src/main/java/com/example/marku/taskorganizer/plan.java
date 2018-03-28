@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Created by marku on 11.3.2018.
+ * class for representing a Plan.
  */
 
 public class plan {

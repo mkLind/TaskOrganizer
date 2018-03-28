@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Created by marku on 18.2.2018.
+ * Maintains the database for plans and tasks
  */
 
 public class Storage extends SQLiteOpenHelper {

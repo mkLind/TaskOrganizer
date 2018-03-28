@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by marku on 11.3.2018.
+ * Class for representing task with a deadline. Implements comparable enabling sorting according to deadline
  */
 
 public class Task implements Comparable<Task>{
