@@ -31,7 +31,7 @@ public class Front extends AppCompatActivity {
 
         }
 
-        ListView tasks = findViewById(R.id.Task_display);
+        ListView tasks =(ListView) findViewById(R.id.Task_display);
         ArrayAdapter<String>  task_adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, tskdisp);
         tasks.setAdapter(task_adapter);
 
